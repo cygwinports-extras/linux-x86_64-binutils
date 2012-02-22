@@ -1,3 +1,4 @@
 category: Devel
 requires: libintl8 zlib0
 sdesc: "Binutils for Linux x86_64 toolchain"
+ldesc: "Binutils for Linux x86_64 toolchain"
