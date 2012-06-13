@@ -4,8 +4,10 @@ inherit toolchain
 
 DESCRIPTION="Binutils for Linux i686 toolchain"
 HOMEPAGE="http://www.gnu.org/software/binutils/"
-case ${PV[3]} in
-[5-9][0-9])
+case ${PV} in
+*.*.*.*.*)
+	SRC_URI="http://www.kernel.org/pub/linux/devel/binutils/binutils-${PV}.tar.xz" ;;
+*.*.[5-9][0-9])
 	SRC_URI="mirror://sourceware/binutils/snapshots/binutils-${PV}.tar.bz2" ;;
 *)	SRC_URI="mirror://gnu/binutils/binutils-${PV}.tar.bz2" ;;
 esac
