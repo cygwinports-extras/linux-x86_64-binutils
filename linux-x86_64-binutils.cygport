@@ -1,8 +1,13 @@
 TOOLCHAIN_TARGET="x86_64-pc-linux-gnu"
-ORIG_PN="binutils"
 inherit toolchain
 
-DESCRIPTION="Binutils for Linux i686 toolchain"
+NAME="linux-x86_64-binutils"
+VERSION=2.23.51.0.3
+RELEASE=1
+CATEGORY="Devel"
+SUMMARY="Binutils for Linux x86-64 toolchain"
+DESCRIPTION="Assember, linker, and other binary utilities required for the
+Linux x86-64 cross-compiling toolchain"
 HOMEPAGE="http://www.gnu.org/software/binutils/"
 case ${PV} in
 *.*.*.*.*)
@@ -11,7 +16,7 @@ case ${PV} in
 	SRC_URI="mirror://sourceware/binutils/snapshots/binutils-${PV}.tar.bz2" ;;
 *)	SRC_URI="mirror://gnu/binutils/binutils-${PV}.tar.bz2" ;;
 esac
-SRC_DIR="${ORIG_PN}-${PV%[a-z]}"
+SRC_DIR="binutils-${PV%[a-z]}"
 PATCH_URI="config-rpath.patch"
 
 CYGCONF_ARGS="--enable-multilib"
