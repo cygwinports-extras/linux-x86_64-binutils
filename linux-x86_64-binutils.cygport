@@ -2,29 +2,32 @@ TOOLCHAIN_TARGET="x86_64-pc-linux-gnu"
 inherit toolchain
 
 NAME="linux-x86_64-binutils"
-VERSION=2.23.51.0.3
+VERSION=2.23.91
 RELEASE=1
 CATEGORY="Devel"
 SUMMARY="Binutils for Linux x86-64 toolchain"
 DESCRIPTION="Assember, linker, and other binary utilities required for the
 Linux x86-64 cross-compiling toolchain"
 HOMEPAGE="http://www.gnu.org/software/binutils/"
-case ${PV} in
+case ${VERSION} in
 *.*.*.*.*)
-	SRC_URI="http://www.kernel.org/pub/linux/devel/binutils/binutils-${PV}.tar.xz" ;;
+	SRC_URI="http://www.kernel.org/pub/linux/devel/binutils/binutils-${VERSION}.tar.xz" ;;
 *.*.[5-9][0-9])
-	SRC_URI="mirror://sourceware/binutils/snapshots/binutils-${PV}.tar.bz2" ;;
-*)	SRC_URI="mirror://gnu/binutils/binutils-${PV}.tar.bz2" ;;
+	SRC_URI="mirror://sourceware/binutils/snapshots/binutils-${VERSION}.tar.bz2" ;;
+*)	SRC_URI="mirror://gnu/binutils/binutils-${VERSION}.tar.bz2" ;;
 esac
-SRC_DIR="binutils-${PV%[a-z]}"
-PATCH_URI="config-rpath.patch"
+SRC_DIR="binutils-${VERSION%[a-z]}"
+PATCH_URI="
+	2.21.1a-textdomain.patch
+	2.21.1a-Wimplicit-decls.patch
+"
 
-CYGCONF_ARGS="--enable-multilib"
+CYGCONF_ARGS="--enable-multilib --disable-werror"
 
 src_install() {
 	cd ${B}
 	cyginstall
 
 	# conflicts with native binutils
-	rm -fr ${D}/usr/lib/ ${D}/usr/share/{info,locale}/
+	rm -fr ${D}/usr/lib/ ${D}/usr/share/info/
 }
